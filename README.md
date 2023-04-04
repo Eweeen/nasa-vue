@@ -1,68 +1,78 @@
-# nasa-vue
+Projet Vue JS
+=
 
-This template should help get you started developing with Vue 3 in Vite.
+Contexte du projet
+==
 
-## Recommended IDE Setup
+Le projet cette fois-ci à réaliser, sera une application en lien avec le système solaire. 
+S'agissant essentiellement d'une application à destination pédagogique, il n'y aura nul besoin d'avoir de gestion de compte utilisateur et l'application ne fonctionnera que avec de la lecture de data issue d'une API.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
+Cette application devra utiliser la technologie Vue JS.
+Il n'est pas attendu de réaliser une application backend.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Bibliothèques tierces
+==
+Tout au long du module nous allons voir certaines bibliothèques additionelles à VueJS. Elles sont tout à fait utilisables dans le cadre de ce projet.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Résultats attendus
+==
 
-## Customize configuration
+Liste des astres
+===
+Une page listant l'ensemble des astres doit être disponible avec les fonctionnalités suivantes :
+ - Filtre sur des critères tels que si c'est une planète (isPlanet) ou non
+ - Filtre sur le fait d'avoir des lunes
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Page de l'astre
+===
+Une page affichant un astre :
+ - L'ensemble des infomations liées à l'astre doivent être affichées au sein de cette page. 
+ - Si l'astre est une planète, possédant des lunes, un accès rapide vers ses lunes doit être disponible.
 
-## Project Setup
+Page du système solaire
+===
+Une page avec une repésentation graphique des astres de type planète :
+ - basé sur la distance de l'astre au soleil, vous devez réaliser une représentation graphique du résultat
 
-```sh
-pnpm install
-```
+Page des favoris
+===
+Il doit être possible de spécifier des astres en tant que favoris et de le retirer de la liste des favoris.
+Lorsque vous rajouter un astre en favory, une notification doit apparaître pour vous le signaler. 
 
-### Compile and Hot-Reload for Development
+L'affichage des astres sur cette page réutilise l'affichage en liste de la page 'liste des astres'
 
-```sh
-pnpm dev
-```
+Les équipes
+===
+Ce projet est à réaliser seul ou en binôme.
 
-### Type-Check, Compile and Minify for Production
+Evaluation
+===
+Au sein de votre livrable final, sera évalué : 
+ - la présence de l'intégralité des fonctionnalités demandées (5)
+ - la propreté du code (10)
+   - indentation du code
+   - propreté des commits
+   - nommage des variables
+   - structure des components
+   - absence de code superflu
+ - un fichier README présentant ce dépot et comment l'installer (2)
+ - le style. Nous ne faisons pas du css ou du sass ici mais c'est mieux quand c'est joli :) (1)
 
-```sh
-pnpm build
-```
+Liens : 
+===
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+A noter que ces liens sont des exemples afin de faciliter votre travail. 
+Si vous préférez utiliser une autre API ou d'autres icones, allez-y.
 
-```sh
-pnpm test:unit
-```
+Api : 
+====
+ - https://api.le-systeme-solaire.net/rest/bodies/
+ - https://api.nasa.gov/
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
 
-```sh
-pnpm test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-pnpm build
-pnpm test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+Exemple de data d'images : 
+====
+ - https://www.flaticon.com/free-icons/planet
+ - https://icons8.com/icons/set/planet
