@@ -9,6 +9,13 @@ export const usePlanetsStore = defineStore("planets", {
     getPlanets(state: any) {
       return state.planets;
     },
+    getPlanetsByIds(state: any) {
+      return (ids: string[]) => {
+        return state.planets.filter((planet: Planet) => {
+          return ids.includes(planet.id);
+        });
+      };
+    },
     getSolarSystem(state: any) {
       return state.planets.filter((planet: Planet) => {
         return planet.isPlanet;
