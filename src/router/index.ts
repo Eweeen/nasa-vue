@@ -46,6 +46,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0);
   const store = usePlanetsStore();
 
   if (store.getPlanets.length > 0) next();
