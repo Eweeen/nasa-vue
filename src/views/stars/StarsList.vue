@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Planet } from "@/interfaces/planet.interface";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
-import { usePlanetsStore } from "@/stores";
+import { useStore } from "@/stores";
 import { ref } from "vue";
 
-const store = usePlanetsStore();
+const store = useStore().planet;
 const planets = ref(store.getPlanets as Planet[]);
 const showFilters = ref(false);
 

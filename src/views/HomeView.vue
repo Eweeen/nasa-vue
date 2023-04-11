@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Planet } from "@/interfaces/planet.interface";
-import { usePlanetsStore } from "@/stores";
+import { useStore } from "@/stores";
 
-const store = usePlanetsStore();
+const store = useStore().planet;
 const planets: Planet[] = store.getSolarSystem;
 </script>
 
@@ -19,7 +19,7 @@ const planets: Planet[] = store.getSolarSystem;
           class="hover:bg-gradient-to-br from-[#ff665c] to-[#7023cb] backdrop-blur-lg w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-2xl flex justify-center items-center shadow-[inset_0_4px_6px_0_rgb(255,255,255,0.5),inset_0_-1px_6px_0_rgb(255,255,255,0.5)]"
         >
           <img
-            :src="`src/assets/icons/${p.id}.png`"
+            :src="`src/assets/img/${p.id}.png`"
             alt="image planète"
             class="w-20 h-20 lg:w-24 lg:h-24"
           />
@@ -29,5 +29,3 @@ const planets: Planet[] = store.getSolarSystem;
     </template>
   </div>
 </template>
-
-<style scoped></style>
