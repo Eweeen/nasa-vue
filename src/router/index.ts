@@ -5,7 +5,7 @@ import Stars from "@/views/stars/StarsList.vue";
 import Star from "@/views/stars/StarView.vue";
 import SolarSystem from "@/views/SolarSystem.vue";
 import MyFavorites from "@/views/MyFavorites.vue";
-import { usePlanetsStore } from "@/stores";
+import { useStore } from "@/stores";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,7 +47,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0);
-  const store = usePlanetsStore();
+  const store = useStore().planet;
 
   if (store.getPlanets.length > 0) next();
 
