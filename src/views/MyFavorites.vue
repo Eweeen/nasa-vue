@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import type { Planet } from "@/interfaces/planet.interface";
-import { usePlanetsStore } from "@/stores";
+import { useStore } from "@/stores";
 import FavouriteItem from "@/components/favourites/FavouriteItem.vue";
 
-const store = usePlanetsStore();
+const store = useStore();
 const planets = ref([] as Planet[]);
 
 onMounted(() => {
@@ -12,11 +12,21 @@ onMounted(() => {
   for (let i = 0; i < localStorage.length; i++) {
     keys.push(localStorage.key(i));
   }
-  planets.value = store.getPlanetsByIds(keys);
+  planets.value = store.planet.getPlanetsByIds(keys);
 });
 
 function remove(id: string) {
   localStorage.removeItem(id);
+
+  const planetName = planets.value.find((p) => p.id === id);
+
+  // Remove from favorites notification
+  store.notifications.addNotification({
+    type: "warning",
+    title: "Suppression des favoris",
+    message: `Suppression de ${planetName?.name ?? "undefined"} des favoris`
+  });
+
   planets.value = planets.value.filter((p) => p.id !== id);
 }
 </script>
@@ -30,5 +40,3 @@ function remove(id: string) {
     </template>
   </div>
 </template>
-
-<style scoped></style>

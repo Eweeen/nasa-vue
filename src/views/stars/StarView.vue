@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import { usePlanetsStore } from "@/stores";
+import { useStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import type { Planet } from "@/interfaces/planet.interface";
 
-const store = usePlanetsStore();
-const { getPlanetById } = storeToRefs(store);
+const store = useStore();
+const notifications = store.notifications;
+const { getPlanetById } = storeToRefs(store.planet);
 
 const route = useRoute();
 const star = ref(getPlanetById.value(route.params.id) as Planet);
@@ -21,9 +22,23 @@ function toggleFavorite() {
   if (localStorage.getItem(star.value.id)) {
     localStorage.removeItem(star.value.id);
     icon.value = "../src/assets/icons/heart-regular.svg";
+
+    // Remove from favorites notification
+    notifications.addNotification({
+      type: "warning",
+      title: "Suppression des favoris",
+      message: `Suppression de ${star.value.name} des favoris`
+    });
   } else {
     localStorage.setItem(star.value.id, star.value.id);
     icon.value = "../src/assets/icons/heart-solid.svg";
+
+    // Add to favorites notification
+    notifications.addNotification({
+      type: "success",
+      title: "Ajout aux favoris",
+      message: `Ajout de ${star.value.name} aux favoris`
+    });
   }
 }
 
@@ -127,5 +142,3 @@ onBeforeRouteUpdate((to) => {
     </div>
   </template>
 </template>
-
-<style scoped></style>
