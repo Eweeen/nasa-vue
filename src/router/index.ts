@@ -31,16 +31,16 @@ const router = createRouter({
           component: Star
         },
         {
-          path: "/solar-system",
-          name: "solar-system",
-          component: SolarSystem
-        },
-        {
           path: "/favorites",
           name: "favorites",
           component: MyFavorites
         }
       ]
+    },
+    {
+      path: "/solar-system",
+      name: "solar-system",
+      component: SolarSystem
     }
   ]
 });
