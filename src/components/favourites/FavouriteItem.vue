@@ -58,5 +58,3 @@ defineProps({
     </Menu>
   </div>
 </template>
-
-<style scoped></style>
