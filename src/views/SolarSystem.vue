@@ -16,13 +16,15 @@ onMounted(() => {
   const solarsys = document.querySelector("#solar-system");
 
   const init = () => {
-    body?.classList.remove("view-2D");
-    body?.classList.remove("opening");
-    body?.classList.add("view-3D");
+    if (!body) return;
+
+    body.classList.remove("view-2D");
+    body.classList.remove("opening");
+    body.classList.add("view-3D");
 
     setTimeout(() => {
-      body?.classList.remove("hide-UI");
-      body?.classList.add("set-speed");
+      body.classList.remove("hide-UI");
+      body.classList.add("set-speed");
     }, 100);
   };
 
@@ -35,13 +37,15 @@ onMounted(() => {
   };
 
   document.querySelector("#toggle-data")?.addEventListener("click", () => {
-    body?.classList.toggle("data-open");
-    body?.classList.toggle("data-close");
+    if (!body) return;
+    body.classList.toggle("data-open");
+    body.classList.toggle("data-close");
   });
 
   document.querySelector("#toggle-controls")?.addEventListener("click", () => {
-    body?.classList.toggle("controls-open");
-    body?.classList.toggle("controls-close");
+    if (!body) return;
+    body.classList.toggle("controls-open");
+    body.classList.toggle("controls-close");
   });
 
   document.querySelectorAll("#data a").forEach((a) => {
@@ -57,15 +61,15 @@ onMounted(() => {
     });
   });
 
-  document.querySelector(".set-view")?.addEventListener("click", (e: any) => {
-    body?.classList.toggle("view-3D");
-    body?.classList.toggle("view-2D");
-    e.preventDefault();
+  document.querySelector(".set-view")?.addEventListener("click", () => {
+    if (!body) return;
+    body.classList.toggle("view-3D");
+    body.classList.toggle("view-2D");
   });
-  document.querySelector(".set-zoom")?.addEventListener("click", (e: any) => {
-    body?.classList.toggle("zoom-large");
-    body?.classList.toggle("zoom-close");
-    e.preventDefault();
+  document.querySelector(".set-zoom")?.addEventListener("click", () => {
+    if (!body) return;
+    body.classList.toggle("zoom-large");
+    body.classList.toggle("zoom-close");
   });
   document.querySelector(".set-speed")?.addEventListener("click", () => {
     setView("scale-stretched set-speed");
