@@ -26,70 +26,67 @@ onMounted(() => {
     }, 100);
   };
 
-  // TODO: fix this
-
   const setView = (view: string) => {
-    universe?.classList.remove();
-    universe?.classList.add(view);
+    if (!universe) return;
+    universe.className = "";
+    view.split(" ").forEach((item) => {
+      universe?.classList.add(item);
+    });
   };
 
-  document.querySelector("#toggle-data")?.addEventListener("click", (e: any) => {
+  document.querySelector("#toggle-data")?.addEventListener("click", () => {
     body?.classList.toggle("data-open");
     body?.classList.toggle("data-close");
-    e.preventDefault();
   });
 
-  document.querySelector("#toggle-controls")?.addEventListener("click", (e: any) => {
+  document.querySelector("#toggle-controls")?.addEventListener("click", () => {
     body?.classList.toggle("controls-open");
     body?.classList.toggle("controls-close");
-    e.preventDefault();
   });
 
-  document.querySelector("#data a")?.addEventListener("click", (e: any) => {
-    const ref = document.querySelector(this)?.className;
-    console.log(ref);
-    solarsys?.classList.remove();
-    solarsys?.classList.add(ref ?? "");
-    // document.querySelector(this).parent().querySelector("a").classList.remove("active");
-    document.querySelector(this)?.classList.add("active");
-    e.preventDefault();
+  document.querySelectorAll("#data a").forEach((a) => {
+    a.addEventListener("click", (e: any) => {
+      if (!solarsys) return;
+      const ref = e.srcElement.className.split(" ")[0];
+      solarsys.className = "";
+      solarsys.classList.add(ref ?? "");
+      document.querySelectorAll("#data a").forEach((item) => {
+        item.classList.remove("active");
+      });
+      e.srcElement.classList.add("active");
+    });
   });
 
   document.querySelector(".set-view")?.addEventListener("click", (e: any) => {
-    body?.classList.toggle("view-3D view-2D");
+    body?.classList.toggle("view-3D");
+    body?.classList.toggle("view-2D");
     e.preventDefault();
   });
   document.querySelector(".set-zoom")?.addEventListener("click", (e: any) => {
-    body?.classList.toggle("zoom-large zoom-close");
+    body?.classList.toggle("zoom-large");
+    body?.classList.toggle("zoom-close");
     e.preventDefault();
   });
-  document.querySelector(".set-speed")?.addEventListener("click", (e: any) => {
+  document.querySelector(".set-speed")?.addEventListener("click", () => {
     setView("scale-stretched set-speed");
-    e.preventDefault();
   });
-  document.querySelector(".set-size")?.addEventListener("click", (e: any) => {
+  document.querySelector(".set-size")?.addEventListener("click", () => {
     setView("scale-s set-size");
-    e.preventDefault();
   });
-  document.querySelector(".set-distance")?.addEventListener("click", (e: any) => {
+  document.querySelector(".set-distance")?.addEventListener("click", () => {
     setView("scale-d set-distance");
-    e.preventDefault();
   });
 
   init();
 });
 </script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
 
 <template>
   <div id="body" class="opening hide-UI view-2D zoom-large data-close controls-close">
     <div id="navbar">
       <a id="toggle-data" href="#data"><i class="icon-data"></i>Data</a>
       <h1>
-        3D Solar System <br />
-        <span>
-          by <a href="https://twitter.com/JulianGarnier" target="_blank">@JulianGarnier</a>
-        </span>
+        <RouterLink to="/">Revenir à l'accueil</RouterLink>
       </h1>
       <a id="toggle-controls" href="#controls"><i class="icon-controls"></i>Controls</a>
     </div>
@@ -1649,8 +1646,8 @@ h1 span,
 
 #controls label {
   opacity: 0.6;
-  height: 24px;
-  margin-bottom: 28px;
+  height: 30px;
+  margin-bottom: 16px;
 }
 
 #controls label:hover {
@@ -1670,8 +1667,8 @@ h1 span,
 
 #controls label span {
   display: block;
+  height: auto;
   margin-left: 36px;
-  padding-top: 4px;
   font-size: 18px;
   color: #fff;
 }
@@ -1697,8 +1694,8 @@ h1 span,
   top: 3px;
   margin-left: 3px;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 10px;
   background: #fff;
   z-index: 99;
@@ -1719,8 +1716,8 @@ h1 span,
   display: block;
   top: 3px;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 10px;
   background: #fff;
   z-index: 99;
@@ -1732,11 +1729,13 @@ h1 span,
 
 .view-3D #controls label.set-view:before {
   content: "2D";
-  margin-left: 82px;
+  margin-top: 1px;
+  margin-left: 75px;
 }
 
 .view-2D #controls label.set-view:before {
   content: "3D";
+  margin-top: 1px;
   margin-left: 7px;
 }
 
@@ -1754,11 +1753,13 @@ h1 span,
 
 .zoom-large #controls label.set-zoom:before {
   content: "+";
-  margin-left: 82px;
+  margin-top: 4px;
+  margin-left: 75px;
 }
 
 .zoom-close #controls label.set-zoom:before {
   content: "-";
+  margin-top: 4px;
   margin-left: 7px;
 }
 
