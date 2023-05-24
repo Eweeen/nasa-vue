@@ -9,14 +9,14 @@ const planets: Planet[] = store.getSolarSystem;
 <template>
   <h1 class="text-4xl font-bold text-red-500 text-center my-16">Bienvenue dans l'espace</h1>
 
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 w-fit m-auto">
     <template v-for="p in planets" :key="p.name">
       <RouterLink
         :to="'/stars/' + p.id"
         class="m-auto flex flex-col items-center gap-2 mb-4 cursor-pointer"
       >
         <div
-          class="hover:bg-gradient-to-br from-[#ff665c] to-[#7023cb] backdrop-blur-lg w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-2xl flex justify-center items-center shadow-[inset_0_4px_6px_0_rgb(255,255,255,0.5),inset_0_-1px_6px_0_rgb(255,255,255,0.5)]"
+          class="lg:mx-12 hover:bg-gradient-to-br from-[#ff665c] to-[#7023cb] backdrop-blur-lg w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-2xl flex justify-center items-center shadow-[inset_0_4px_6px_0_rgb(255,255,255,0.5),inset_0_-1px_6px_0_rgb(255,255,255,0.5)]"
         >
           <img
             :src="`src/assets/img/${p.id}.png`"
