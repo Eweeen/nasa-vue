@@ -50,29 +50,16 @@ Ce projet est à réaliser seul ou en binôme.
 Evaluation
 ===
 Au sein de votre livrable final, sera évalué : 
- - la présence de l'intégralité des fonctionnalités demandées (5)
+ - [ ] la présence de l'intégralité des fonctionnalités demandées (5)
  - la propreté du code (10)
-   - indentation du code
-   - propreté des commits
-   - nommage des variables
-   - structure des components
-   - absence de code superflu
- - un fichier README présentant ce dépot et comment l'installer (2)
- - le style. Nous ne faisons pas du css ou du sass ici mais c'est mieux quand c'est joli :) (1)
-
-Liens : 
-===
-
-A noter que ces liens sont des exemples afin de faciliter votre travail. 
-Si vous préférez utiliser une autre API ou d'autres icones, allez-y.
+   - [ ] indentation du code
+   - [ ] propreté des commits
+   - [ ] nommage des variables
+   - [ ] structure des components
+   - [ ] absence de code superflu
+ - [ ] un fichier README présentant ce dépot et comment l'installer (2)
+ - [ ] le style. Nous ne faisons pas du css ou du sass ici mais c'est mieux quand c'est joli :) (1)
 
 Api : 
 ====
  - https://api.le-systeme-solaire.net/rest/bodies/
- - https://api.nasa.gov/
-
-
-Exemple de data d'images : 
-====
- - https://www.flaticon.com/free-icons/planet
- - https://icons8.com/icons/set/planet
