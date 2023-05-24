@@ -39,15 +39,15 @@ L'affichage des astres sur cette page réutilise l'affichage en liste de la page
 
 Au sein de votre livrable final, sera évalué :
 
-- [ ] la présence de l'intégralité des fonctionnalités demandées (5)
+- [x] la présence de l'intégralité des fonctionnalités demandées (5)
 - la propreté du code (10)
-  - [ ] indentation du code
-  - [ ] propreté des commits
-  - [ ] nommage des variables
-  - [ ] structure des components
-  - [ ] absence de code superflu
-- [ ] un fichier README présentant ce dépot et comment l'installer (2)
-- [ ] le style. Nous ne faisons pas du css ou du sass ici mais c'est mieux quand c'est joli :) (1)
+  - [x] indentation du code
+  - [x] propreté des commits
+  - [x] nommage des variables
+  - [x] structure des components
+  - [x] absence de code superflu
+- [x] un fichier README présentant ce dépot et comment l'installer (2)
+- [x] le style. Nous ne faisons pas du css ou du sass ici mais c'est mieux quand c'est joli :) (1)
 
 # Api
 
