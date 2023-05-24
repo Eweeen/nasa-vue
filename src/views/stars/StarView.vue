@@ -5,23 +5,24 @@ import { useStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import type { Planet } from "@/interfaces/planet.interface";
 
+import heartSolid from "@/assets/icons/heart-solid.svg";
+import heartRegular from "@/assets/icons/heart-regular.svg";
+
 const store = useStore();
 const notifications = store.notifications;
+const favoris = store.favoris;
 const { getPlanetById } = storeToRefs(store.planet);
+const { getFavorisById } = storeToRefs(store.favoris);
 
 const route = useRoute();
 const star = ref(getPlanetById.value(route.params.id) as Planet);
 
-const icon = ref(
-  localStorage.getItem(star.value.id)
-    ? "../src/assets/icons/heart-solid.svg"
-    : "../src/assets/icons/heart-regular.svg"
-);
+const icon = ref(getFavorisById.value(star.value.id) ? heartSolid : heartRegular);
 
 function toggleFavorite() {
-  if (localStorage.getItem(star.value.id)) {
-    localStorage.removeItem(star.value.id);
-    icon.value = "../src/assets/icons/heart-regular.svg";
+  if (getFavorisById.value(star.value.id)) {
+    favoris.removeFavoris(star.value.id);
+    icon.value = heartRegular;
 
     // Remove from favorites notification
     notifications.addNotification({
@@ -30,8 +31,8 @@ function toggleFavorite() {
       message: `Suppression de ${star.value.name} des favoris`
     });
   } else {
-    localStorage.setItem(star.value.id, star.value.id);
-    icon.value = "../src/assets/icons/heart-solid.svg";
+    favoris.addFavoris(star.value.id);
+    icon.value = heartSolid;
 
     // Add to favorites notification
     notifications.addNotification({

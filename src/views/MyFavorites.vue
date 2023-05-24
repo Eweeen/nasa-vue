@@ -6,17 +6,14 @@ import FavouriteItem from "@/components/favourites/FavouriteItem.vue";
 
 const store = useStore();
 const planets = ref([] as Planet[]);
+const favoris = store.favoris;
 
 onMounted(() => {
-  const keys = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    keys.push(localStorage.key(i));
-  }
-  planets.value = store.planet.getPlanetsByIds(keys);
+  planets.value = store.planet.getPlanetsByIds(favoris.favoris);
 });
 
 function remove(id: string) {
-  localStorage.removeItem(id);
+  favoris.removeFavoris(id);
 
   const planetName = planets.value.find((p) => p.id === id);
 
