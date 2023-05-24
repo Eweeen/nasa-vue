@@ -35,7 +35,9 @@ defineProps({
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <MenuItems class="absolute right-0 w-max bg-slate-600 p-1 rounded-lg flex flex-col gap-1">
+        <MenuItems
+          class="absolute right-0 w-max bg-slate-600 p-1 rounded-lg flex flex-col gap-1 z-50"
+        >
           <MenuItem as="div">
             <RouterLink
               :to="'/stars/' + planet.id"
