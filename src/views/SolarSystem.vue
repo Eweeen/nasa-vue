@@ -127,7 +127,7 @@ onMounted(() => {
     <!-- ================ -->
     <!-- ===== Controls ===== -->
     <div id="controls">
-      <label ref="setView" class="set-view">
+      <label ref="setViewE" class="set-view">
         <input type="checkbox" />
       </label>
       <label ref="setZoom" class="set-zoom">
