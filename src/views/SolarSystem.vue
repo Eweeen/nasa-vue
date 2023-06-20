@@ -1,83 +1,98 @@
 <script setup lang="ts">
-import type { Planet } from "@/interfaces/planet.interface";
-import { useStore } from "@/stores";
-import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
-const store = useStore().planet;
-const { getPlanetById } = storeToRefs(store);
+// Refs
+const body = ref(null as null | HTMLElement);
+const universe = ref(null as null | HTMLElement);
+const solarsys = ref(null as null | HTMLElement);
+const toggleData = ref(null as null | HTMLElement);
+const toggleControls = ref(null as null | HTMLElement);
+const data = ref(null as null | HTMLElement);
+const setViewE = ref(null as null | HTMLElement);
+const setZoom = ref(null as null | HTMLElement);
+const setSpeed = ref(null as null | HTMLElement);
+const setSize = ref(null as null | HTMLElement);
+const setDistance = ref(null as null | HTMLElement);
 
-const sun: Planet = getPlanetById.value("soleil");
-const solarSystem: Planet[] = store.getSolarSystem;
+// Planets
+const planets = [
+  { id: "mercury", name: "Mercury" },
+  { id: "venus", name: "Venus" },
+  { id: "earth", name: "Earth" },
+  { id: "mars", name: "Mars" },
+  { id: "jupiter", name: "Jupiter" },
+  { id: "saturn", name: "Saturn" },
+  { id: "uranus", name: "Uranus" },
+  { id: "neptune", name: "Neptune" }
+];
 
 onMounted(() => {
-  const body = document.querySelector("#body");
-  const universe = document.querySelector("#universe");
-  const solarsys = document.querySelector("#solar-system");
-
   const init = () => {
-    if (!body) return;
+    if (!body.value) return;
 
-    body.classList.remove("view-2D");
-    body.classList.remove("opening");
-    body.classList.add("view-3D");
+    body.value.classList.remove("view-2D");
+    body.value.classList.remove("opening");
+    body.value.classList.add("view-3D");
 
     setTimeout(() => {
-      body.classList.remove("hide-UI");
-      body.classList.add("set-speed");
+      body.value?.classList.remove("hide-UI");
+      body.value?.classList.add("set-speed");
     }, 100);
   };
 
   const setView = (view: string) => {
-    if (!universe) return;
-    universe.className = "";
+    if (!universe.value) return;
+    universe.value.className = "";
     view.split(" ").forEach((item) => {
-      universe?.classList.add(item);
+      universe.value?.classList.add(item);
     });
   };
 
-  document.querySelector("#toggle-data")?.addEventListener("click", () => {
-    if (!body) return;
-    body.classList.toggle("data-open");
-    body.classList.toggle("data-close");
+  toggleData.value?.addEventListener("click", () => {
+    if (!body.value) return;
+    body.value.classList.toggle("data-open");
+    body.value.classList.toggle("data-close");
   });
 
-  document.querySelector("#toggle-controls")?.addEventListener("click", () => {
-    if (!body) return;
-    body.classList.toggle("controls-open");
-    body.classList.toggle("controls-close");
+  toggleControls.value?.addEventListener("click", () => {
+    if (!body.value) return;
+    body.value.classList.toggle("controls-open");
+    body.value.classList.toggle("controls-close");
   });
 
-  document.querySelectorAll("#data a").forEach((a) => {
-    a.addEventListener("click", (e: any) => {
-      if (!solarsys) return;
-      const ref = e.srcElement.className.split(" ")[0];
-      solarsys.className = "";
-      solarsys.classList.add(ref ?? "");
-      document.querySelectorAll("#data a").forEach((item) => {
-        item.classList.remove("active");
+  const children = data.value?.children;
+  if (children) {
+    for (const a of children) {
+      a.addEventListener("click", (e: any) => {
+        if (!solarsys.value) return;
+        const ref = e.srcElement.className.split(" ")[0];
+        solarsys.value.className = "";
+        solarsys.value.classList.add(ref ?? "");
+        for (const item of children) {
+          item.classList.remove("active");
+        }
+        e.srcElement.classList.add("active");
       });
-      e.srcElement.classList.add("active");
-    });
-  });
+    }
+  }
 
-  document.querySelector(".set-view")?.addEventListener("click", () => {
-    if (!body) return;
-    body.classList.toggle("view-3D");
-    body.classList.toggle("view-2D");
+  setViewE.value?.addEventListener("click", () => {
+    if (!body.value) return;
+    body.value.classList.toggle("view-3D");
+    body.value.classList.toggle("view-2D");
   });
-  document.querySelector(".set-zoom")?.addEventListener("click", () => {
-    if (!body) return;
-    body.classList.toggle("zoom-large");
-    body.classList.toggle("zoom-close");
+  setZoom.value?.addEventListener("click", () => {
+    if (!body.value) return;
+    body.value.classList.toggle("zoom-large");
+    body.value.classList.toggle("zoom-close");
   });
-  document.querySelector(".set-speed")?.addEventListener("click", () => {
+  setSpeed.value?.addEventListener("click", () => {
     setView("scale-stretched set-speed");
   });
-  document.querySelector(".set-size")?.addEventListener("click", () => {
+  setSize.value?.addEventListener("click", () => {
     setView("scale-s set-size");
   });
-  document.querySelector(".set-distance")?.addEventListener("click", () => {
+  setDistance.value?.addEventListener("click", () => {
     setView("scale-d set-distance");
   });
 
@@ -86,15 +101,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="body" class="opening hide-UI view-2D zoom-large data-close controls-close">
+  <div ref="body" id="body" class="opening hide-UI view-2D zoom-large data-close controls-close">
     <div id="navbar">
-      <a id="toggle-data" href="#data"><i class="icon-data"></i>Data</a>
+      <a ref="toggleData" id="toggle-data" href="#data"><i class="icon-data"></i>Data</a>
       <h1>
         <RouterLink to="/">Revenir à l'accueil</RouterLink>
       </h1>
-      <a id="toggle-controls" href="#controls"><i class="icon-controls"></i>Controls</a>
+      <a ref="toggleControls" id="toggle-controls" href="#controls">
+        <i class="icon-controls"></i>
+        Controls
+      </a>
     </div>
-    <div id="data">
+    <!-- ===== Data ===== -->
+    <div ref="data" id="data">
       <a class="sun" title="sun" href="#sunspeed">Sun</a>
       <a class="mercury" title="mercury" href="#mercuryspeed">Mercury</a>
       <a class="venus" title="venus" href="#venusspeed">Venus</a>
@@ -105,121 +124,52 @@ onMounted(() => {
       <a class="uranus" title="uranus" href="#uranusspeed">Uranus</a>
       <a class="neptune" title="neptune" href="#neptunespeed">Neptune</a>
     </div>
+    <!-- ================ -->
+    <!-- ===== Controls ===== -->
     <div id="controls">
-      <label class="set-view">
+      <label ref="setView" class="set-view">
         <input type="checkbox" />
       </label>
-      <label class="set-zoom">
+      <label ref="setZoom" class="set-zoom">
         <input type="checkbox" />
       </label>
       <label>
-        <input type="radio" class="set-speed" name="scale" checked />
+        <input ref="setSpeed" type="radio" class="set-speed" name="scale" checked />
         <span>Speed</span>
       </label>
       <label>
-        <input type="radio" class="set-size" name="scale" />
+        <input ref="setSize" type="radio" class="set-size" name="scale" />
         <span>Size</span>
       </label>
       <label>
-        <input type="radio" class="set-distance" name="scale" />
+        <input ref="setDistance" type="radio" class="set-distance" name="scale" />
         <span>Distance</span>
       </label>
     </div>
-    <div id="universe" class="scale-stretched">
+    <!-- ==================== -->
+    <div ref="universe" id="universe" class="scale-stretched">
       <div id="galaxy">
-        <div id="solar-system" class="earth">
-          <div id="mercury" class="orbit">
+        <div ref="solarsys" id="solar-system" class="earth">
+          <!-- ===== Planets ===== -->
+          <div v-for="p of planets" :key="p.id" :id="p.id" class="orbit">
             <div class="pos">
               <div class="planet">
                 <dl class="infos">
-                  <dt>Mercury</dt>
+                  <dt>{{ p.name }}</dt>
                   <dd><span></span></dd>
                 </dl>
               </div>
             </div>
           </div>
-          <div id="venus" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Venus</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="earth" class="orbit">
-            <div class="pos">
-              <div class="orbit">
-                <div class="pos">
-                  <div class="moon"></div>
-                </div>
-              </div>
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Earth</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="mars" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Mars</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="jupiter" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Jupiter</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="saturn" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <div class="ring"></div>
-                <dl class="infos">
-                  <dt>Saturn</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="uranus" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Uranus</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div id="neptune" class="orbit">
-            <div class="pos">
-              <div class="planet">
-                <dl class="infos">
-                  <dt>Neptune</dt>
-                  <dd><span></span></dd>
-                </dl>
-              </div>
-            </div>
-          </div>
+          <!-- =================== -->
+          <!-- ===== Sun ===== -->
           <div id="sun">
             <dl class="infos">
               <dt>Sun</dt>
               <dd><span></span></dd>
             </dl>
           </div>
+          <!-- =============== -->
         </div>
       </div>
     </div>
